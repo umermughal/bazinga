@@ -16,7 +16,7 @@ jobs:
     - name: Extract project and content_type from issue description
       id: extract_values
       run: |
-        FILE = "${{ github.event.issue.body }}"
+        FILE="${{ github.event.issue.body }}"
         PROJECT=$(grep 'project:' $FILE | awk '{print $2}')
         echo "Project Name: $PROJECT"
 
