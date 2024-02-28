@@ -17,11 +17,11 @@ jobs:
       id: extract_values
       run: |
         body="${{ github.event.issue.body }}"
-        project_name=$(printf "%s\n" "$body" | grep "project:" | awk '{print $2}')
+        project_name=$(printf "%s\n" "$body" | grep "project:" | awk '{print $2}') | xargs
         echo "Project Name: $project_name"
         
         # Extract content type the same way
-        content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}')
+        content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}') | xargs
         echo "Content Type: $content_type"
         
 
