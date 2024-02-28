@@ -18,11 +18,11 @@ jobs:
       run: |
         body="${{ github.event.issue.body }}"
         project_name=$(printf "%s\n" "$body" | grep "project:" | awk '{print $2}')
-        echo "Project Name: $project_name"
+        echo "Project Name: jjj$project_name ooooo"
         
         # Extract content type the same way
         content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}')
-        echo "Content Type: $content_type"
+        echo "Content Type: iiii$content_type 0000"
         
 
     - name: Build
