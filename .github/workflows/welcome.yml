@@ -1,0 +1,27 @@
+name: Welcome
+
+on:
+  issues:
+    types:
+      - opened
+    tags:
+      - new
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Extract project and content_type from issue description
+      id: extract_values
+      run: |
+        DESCRIPTION="${{ github.event.issue.body }}"  # Get the issue description
+        PROJECT=$(echo "$DESCRIPTION" | grep -oP 'project:\K\w+')
+        CONTENT_TYPE=$(echo "$DESCRIPTION" | grep -oP 'content_type:\K\w+')
+        echo "project=$PROJECT" >> $GITHUB_OUTPUT
+        echo "content_type=$CONTENT_TYPE" >> $GITHUB_OUTPUT
+
+    - name: Build
+      run: |
+        echo "${{ needs.extract_values.outputs.project }}--ppp"
+        echo "${{ needs.extract_values.outputs.content_type }} --- ccc"
