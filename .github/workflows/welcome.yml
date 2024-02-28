@@ -16,15 +16,14 @@ jobs:
     - name: Extract project and content_type from issue description
       id: extract_values
       run: |
-        FILE="${{ github.event.issue.body }}"
-        PROJECT=$(grep 'project:' $FILE | awk '{print $2}')
-        echo "Project Name: $PROJECT"
-
-        # Extract content type
-        CONTENT_TYPE=$(grep 'content_type:' $FILE | awk '{print $2}')
-        echo "Content Type: $CONTENT_TYPE"
-        echo "project=$PROJECT" >> $GITHUB_OUTPUT
-        echo "content_type=$CONTENT_TYPE" >> $GITHUB_OUTPUT
+        body="${{ github.event.issue.body }}"
+        project_name=$(printf "%s\n" "$body" | grep "project:" | awk '{print $2}')
+        echo "Project Name: $project_name"
+        
+        # Extract content type the same way
+        content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}')
+        echo "Content Type: $content_type"
+        
 
     - name: Build
       run: |
