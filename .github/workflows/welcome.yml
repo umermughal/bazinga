@@ -4,6 +4,7 @@ on:
   issues:
     types:
       - opened
+      - updated
     tags:
       - new
 
@@ -15,9 +16,13 @@ jobs:
     - name: Extract project and content_type from issue description
       id: extract_values
       run: |
-        DESCRIPTION="${{ github.event.issue.body }}"  # Get the issue description
-        PROJECT=$(echo "$DESCRIPTION" | grep -oP 'project:\K\w+')
-        CONTENT_TYPE=$(echo "$DESCRIPTION" | grep -oP 'content_type:\K\w+')
+        FILE = "${{ github.event.issue.body }}"
+        PROJECT=$(grep 'project:' $FILE | awk '{print $2}')
+        echo "Project Name: $PROJECT"
+
+        # Extract content type
+        CONTENT_TYPE=$(grep 'content_type:' $FILE | awk '{print $2}')
+        echo "Content Type: $CONTENT_TYPE"
         echo "project=$PROJECT" >> $GITHUB_OUTPUT
         echo "content_type=$CONTENT_TYPE" >> $GITHUB_OUTPUT
 
