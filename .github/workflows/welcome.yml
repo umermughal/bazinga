@@ -32,7 +32,7 @@ jobs:
         # Extract content type the same way
         content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}')
         echo "Content Type: iiii$content_type 0000"
-        echo "project=$project" >> $GITHUB_OUTPUT
+        echo "project=$project_name" >> $GITHUB_OUTPUT
         echo "content_type=$content_type" >> $GITHUB_OUTPUT
         
   access:
