@@ -39,7 +39,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/_test.yml
     with:
-      PROJECT: ${{ needs.build.outputs.project || inputs.projects }} 
+      PROJECT: ${{ needs.build.outputs.project || inputs.project }} 
       CONTENT_TYPE: ${{ needs.build.outputs.content_type || inputs.content_type }}
         
     
