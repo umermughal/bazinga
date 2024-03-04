@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      project: ${{ steps.extract_values.outputs.project }}
+      content_type: ${{ steps.extract_values.outputs.content_type }}
     steps:
     - name: Extract project and content_type from issue description
       id: extract_values
