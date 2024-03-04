@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
     inputs:
       project:
-        required: true
         type: string
       content_type:
         type: string
