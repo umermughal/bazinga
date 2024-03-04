@@ -1,1 +1,20 @@
+name: Deploy Content
+on:
+  workflow_call:
+    inputs:
+      PROJECT:
+        required: true
+        type: string
+      CONTENT_TYPE:
+        required: true
+        type: string
 
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse projects input into an array
+        id: vars
+        run: |
+          echo ${{ inputs.PROJECT }}
+          echo ${{ inputs.CONTENT_TYPE }}
