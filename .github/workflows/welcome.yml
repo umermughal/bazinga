@@ -7,6 +7,14 @@ on:
       - edited
     tags:
       - new
+  workflow_dispatch:
+    inputs:
+      project:
+        required: true
+        type: string
+      content_type:
+        type: string
+        default: scrollables
 
 jobs:
   build:
