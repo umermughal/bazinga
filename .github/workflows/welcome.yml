@@ -11,7 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Extract project and content_type from issue description
       id: extract_values
@@ -23,9 +22,18 @@ jobs:
         # Extract content type the same way
         content_type=$(printf "%s\n" "$body" | grep "content_type:" | awk '{print $2}')
         echo "Content Type: iiii$content_type 0000"
+        echo "project=$project" >> $GITHUB_OUTPUT
+        echo "content_type=$content_type" >> $GITHUB_OUTPUT
         
-
-    - name: Build
+  access:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: print vars
       run: |
-        echo "${{ needs.extract_values.outputs.project }}--ppp"
-        echo "${{ needs.extract_values.outputs.content_type }} --- ccc"
+        echo ${{ needs.build.outputs.content_type }}
+        echo ${{ needs.build.outputs.project }}
+        
+    
+
+    
