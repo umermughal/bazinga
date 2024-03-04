@@ -30,12 +30,10 @@ jobs:
         
   access:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: print vars
-      run: |
-        echo ${{ needs.build.outputs.content_type }}
-        echo ${{ needs.build.outputs.project }}
+    uses: ./.github/workflows/_test.yml
+    with:
+      PROJECT: ${{ needs.build.outputs.project }} | inputs.projects
+      CONTENT_TYPE: ${{ needs.build.outputs.content_type }} | inputs.content_type
         
     
 
